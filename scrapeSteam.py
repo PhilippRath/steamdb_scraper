@@ -2,6 +2,7 @@ from flask import Flask, jsonify, json
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+import os
 
 class Release():
     id = None
@@ -15,7 +16,9 @@ class Release():
     applogo = None
 
 class App():
-    uri = "mongodb+srv://prath:ffWubpPWNQZrlVZr@bbwfi.m1wu7rg.mongodb.net/"
+    username = os.getenv("MONGODB_USERNAME")
+    password = os.getenv("MONGODB_PASSWORD")
+    uri = f"mongodb+srv://{username}:{password}@bbwfi.m1wu7rg.mongodb.net/"
     releases = set()
     releases_json = []
 

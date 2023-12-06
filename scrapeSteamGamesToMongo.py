@@ -5,8 +5,6 @@ from functools import total_ordering
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
 import os
-from dotenv import load_dotenv
-
 
 
 DEFAULT_REQUEST_HEADERS = {
@@ -62,9 +60,6 @@ class SteamApp:
         return hash(self.id)
 
 class App():
-
-    # Load environment variables from .env file
-    load_dotenv()
 
     # Get the MongoDB username and password from environment variables
     username = os.getenv("MONGODB_USERNAME")

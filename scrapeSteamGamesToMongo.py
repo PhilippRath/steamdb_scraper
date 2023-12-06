@@ -4,6 +4,8 @@ import http.cookiejar as cookielib
 from functools import total_ordering
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
 
 
 
@@ -60,8 +62,17 @@ class SteamApp:
         return hash(self.id)
 
 class App():
-    uri = "mongodb+srv://prath:ffWubpPWNQZrlVZr@bbwfi.m1wu7rg.mongodb.net/"
-    
+
+    # Load environment variables from .env file
+    load_dotenv()
+
+    # Get the MongoDB username and password from environment variables
+    username = os.getenv("MONGODB_USERNAME")
+    password = os.getenv("MONGODB_PASSWORD")
+
+    # Construct the MongoDB URI with the username and password
+    uri = f"mongodb+srv://{username}:{password}@bbwfi.m1wu7rg.mongodb.net/"
+
     def __init__(self):
         self.client = MongoClient(self.uri)  
         self.db = self.client['steam']  
